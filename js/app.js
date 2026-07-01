@@ -115,6 +115,7 @@ const App = {
     },
 
     updateDate() {
+        
 
         const now = new Date();
 
@@ -130,3 +131,166 @@ const App = {
             );
 
     },
+       updateCountdown() {
+
+        const now = new Date();
+
+        const weekDay =
+            (now.getDay() + 6) % 7 + 1;
+
+        this.weekLeft.textContent =
+            `Осталось ${7 - weekDay} из 7`;
+
+        const daysInMonth =
+            new Date(
+                now.getFullYear(),
+                now.getMonth() + 1,
+                0
+            ).getDate();
+
+        this.monthLeft.textContent =
+            `Осталось ${
+                daysInMonth - now.getDate()
+            } из ${daysInMonth}`;
+
+        const start =
+            new Date(
+                now.getFullYear(),
+                0,
+                1
+            );
+
+        const day =
+            Math.floor(
+                (now - start) / 86400000
+            ) + 1;
+
+        const yearDays =
+
+            (
+                now.getFullYear() % 400 === 0
+            ) ||
+
+            (
+                now.getFullYear() % 4 === 0 &&
+                now.getFullYear() % 100 !== 0
+            )
+
+                ? 366
+
+                : 365;
+
+        this.yearLeft.textContent =
+            `Осталось ${
+                yearDays - day
+            } из ${yearDays}`;
+
+    },
+
+    updateProgress() {
+
+        const stats =
+            Stats.get();
+
+        this.progressFill.style.width =
+            stats.percent + "%";
+
+        this.progressText.textContent =
+            `${stats.completed} из ${stats.total} • ${stats.percent}%`;
+
+    },
+renderTasks() {
+
+    if (!this.taskList) return;
+
+    this.taskList.innerHTML = "";
+
+    const search =
+        this.searchInput
+            ? this.searchInput.value.toLowerCase()
+            : "";
+
+    Tasks.items.forEach(task => {
+
+        if (
+            search &&
+            !task.text
+                .toLowerCase()
+                .includes(search)
+        ) {
+            return;
+        }
+
+        const item =
+            document.createElement("div");
+
+        item.className = "task fade";
+
+        item.innerHTML = `
+
+<label style="display:flex;align-items:center;gap:12px;">
+
+<input
+type="checkbox"
+${task.done ? "checked" : ""}>
+
+<span
+style="
+flex:1;
+${task.done
+? "text-decoration:line-through;color:#8fb7a3;"
+: ""}
+">
+
+${task.text}
+
+</span>
+
+</label>
+
+<button class="deleteButton">
+🗑️
+</button>
+
+`;
+
+        const checkbox =
+            item.querySelector("input");
+
+        checkbox.onchange = () => {
+
+            Tasks.toggle(task.id);
+
+            this.renderTasks();
+
+            this.updateProgress();
+
+        };
+
+        item
+            .querySelector(".deleteButton")
+            .onclick = () => {
+
+                if (
+                    !confirm(
+                        "Удалить задачу?"
+                    )
+                ) return;
+
+                Tasks.remove(task.id);
+
+                this.renderTasks();
+
+                this.updateProgress();
+
+            };
+
+        this.taskList.appendChild(item);
+
+    });
+
+}
+
+};
+
+App.init();
