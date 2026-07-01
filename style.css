@@ -1,0 +1,146 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0b1d16;
+    color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    padding:20px;
+    padding-bottom:100px;
+}
+
+.header{
+    margin-bottom:20px;
+}
+
+.logo{
+    font-size:34px;
+    font-weight:700;
+}
+
+.greeting{
+    margin-top:8px;
+    color:#b6d8c7;
+}
+
+.date{
+    margin-top:4px;
+    color:#7fa18f;
+    font-size:14px;
+}
+
+.card{
+    background:#13271f;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:16px;
+}
+
+.card h2{
+    margin-bottom:14px;
+    font-size:20px;
+}
+
+.progress{
+    height:12px;
+    background:#243b31;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:#39d98a;
+    transition:.3s;
+}
+
+.progress-text{
+    margin-top:12px;
+    color:#b6d8c7;
+}
+
+.time-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.time-row:last-child{
+    border-bottom:none;
+}
+
+.search{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:#1a3128;
+    color:white;
+    font-size:16px;
+    margin-bottom:16px;
+}
+
+.task{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px;
+    margin-bottom:10px;
+    background:#183229;
+    border-radius:14px;
+}
+
+.deleteButton{
+    background:none;
+    border:none;
+    color:#ff8d8d;
+    font-size:20px;
+}
+
+.fab{
+    position:fixed;
+    right:20px;
+    bottom:90px;
+
+    width:60px;
+    height:60px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#39d98a;
+    color:#062012;
+
+    font-size:34px;
+    font-weight:bold;
+}
+
+.bottom-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:70px;
+
+    background:#10241d;
+
+    display:flex;
+}
+
+.nav-button{
+    flex:1;
+    border:none;
+    background:none;
+    color:#9fc5b1;
+    font-size:14px;
+}
+
+.nav-button.active{
+    color:#39d98a;
+}
