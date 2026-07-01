@@ -25,6 +25,261 @@
 
 <div id="app">
 
+    <header class="header">
+
+        <h1 class="logo">
+            LifeHub
+        </h1>
+
+        <div
+            id="greeting"
+            class="greeting">
+        </div>
+
+        <div
+            id="todayDate"
+            class="date">
+        </div>
+
+    </header>
+
+    <main id="screens">
+
+        <section
+            id="screen-home"
+            class="screen active">
+
+            <section class="card">
+
+                <h2>
+                    🎯 Сегодня
+                </h2>
+
+                <div class="progress">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill">
+                    </div>
+
+                </div>
+
+                <div
+                    id="progressText"
+                    class="progress-text">
+
+                    0 из 0 • 0%
+
+                </div>
+
+            </section>
+
+            <section class="card">
+
+                <h2>
+                    📅 Время
+                </h2>
+
+                <div class="time-row">
+
+                    <span>Неделя</span>
+
+                    <span id="weekLeft"></span>
+
+                </div>
+
+                <div class="time-row">
+
+                    <span>Месяц</span>
+
+                    <span id="monthLeft"></span>
+
+                </div>
+
+                <div class="time-row">
+
+                    <span>Год</span>
+
+                    <span id="yearLeft"></span>
+
+                </div>
+
+            </section>
+            <section class="card">
+
+    <div class="card-header">
+
+        <h2>
+            ✅ Задачи
+        </h2>
+
+        <button
+            id="addButton"
+            class="add-button">
+
+            ＋
+
+        </button>
+
+    </div>
+
+    <input
+        id="searchInput"
+        class="search-input"
+        type="text"
+        placeholder="Поиск задач...">
+
+    <div
+        id="taskList"
+        class="task-list">
+
+    </div>
+
+</section>
+
+        </section>
+        <!-- Экран "Все задачи" -->
+
+<section
+    id="screen-tasks"
+    class="screen hidden">
+
+    <section class="card">
+
+        <h2>
+            📋 Все задачи
+        </h2>
+
+        <div
+            id="allTaskList"
+            class="task-list">
+
+        </div>
+
+    </section>
+
+</section>
+<!-- Экран "Привычки" -->
+
+<section
+    id="screen-habits"
+    class="screen hidden">
+
+    <section class="card">
+
+        <h2>
+            💧 Привычки
+        </h2>
+
+        <div
+            id="habitList"
+            class="task-list">
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<!-- Экран "Цели" -->
+
+<section
+    id="screen-goals"
+    class="screen hidden">
+
+    <section class="card">
+
+        <h2>
+            🎯 Цели
+        </h2>
+
+        <div
+            id="goalList"
+            class="task-list">
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<!-- Экран "Статистика" -->
+
+<section
+    id="screen-stats"
+    class="screen hidden">
+
+    <section class="card">
+
+        <h2>
+            📊 Статистика
+        </h2>
+
+        <div
+            id="statsContent">
+
+        </div>
+
+    </section>
+
+</section>
+        <nav class="bottom-nav">
+
+    <button
+        class="nav-button active"
+        data-screen="home">
+
+        🏠
+
+        <span>Сегодня</span>
+
+    </button>
+
+    <button
+        class="nav-button"
+        data-screen="tasks">
+
+        📋
+
+        <span>Задачи</span>
+
+    </button>
+
+    <button
+        class="nav-button"
+        data-screen="habits">
+
+        💧
+
+        <span>Привычки</span>
+
+    </button>
+
+    <button
+        class="nav-button"
+        data-screen="goals">
+
+        🎯
+
+        <span>Цели</span>
+
+    </button>
+
+    <button
+        class="nav-button"
+        data-screen="stats">
+
+        📊
+
+        <span>Статистика</span>
+
+    </button>
+
+</nav>
+    </main>
+
 </div>
 
 <script src="js/storage.js"></script>
