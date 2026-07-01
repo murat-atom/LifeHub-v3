@@ -8,8 +8,7 @@ const Navigation = {
     init() {
 
         this.buttons =
-            document.querySelectorAll(".nav-btn");
-
+    document.querySelectorAll(".nav-button");
         this.screens =
             document.querySelectorAll(".screen");
 
