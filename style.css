@@ -309,3 +309,22 @@ body{
     border-left:4px solid #39d98a;
 
 }
+.task-preview{
+
+    background:#183229;
+
+    padding:10px 12px;
+
+    border-radius:10px;
+
+    margin-bottom:8px;
+
+    cursor:pointer;
+
+}
+
+.task-preview:active{
+
+    opacity:.7;
+
+}
