@@ -314,26 +314,24 @@ tasks.slice(0,3).forEach(task => {
 // Изменение квадранта
 // =====================================
 
-Tasks.changePriority = function (id) {
+Tasks.changePriority = function(id){
 
-alert("Нажатие работает");
-    const task =
-        this.items.find(t => t.id === id);
+    const task = this.items.find(t => t.id === id);
 
-    if (!task) return;
+    if(!task) return;
 
     const value = prompt(
-
 `Выберите квадрант:
 
 1 — Срочно и важно
 2 — Важно не срочно
 3 — Срочно не важно
 4 — Остальное`
-
     );
 
-    switch (value) {
+    if(value === null) return;
+
+    switch(value){
 
         case "1":
             task.priority = "importantUrgent";
@@ -347,8 +345,12 @@ alert("Нажатие работает");
             task.priority = "urgent";
             break;
 
-        default:
+        case "4":
             task.priority = "normal";
+            break;
+
+        default:
+            return;
 
     }
 
