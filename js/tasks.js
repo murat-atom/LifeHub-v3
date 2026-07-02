@@ -268,3 +268,87 @@ Tasks.fillMatrix = function (name, list) {
     });
 
 };
+// =====================================
+// Матрица Эйзенхауэра
+// =====================================
+
+Tasks.renderMatrix = function () {
+
+    const groups = {
+        importantUrgent: [],
+        important: [],
+        urgent: [],
+        other: []
+    };
+
+    this.items.forEach(task => {
+
+        switch (task.priority) {
+
+            case "importantUrgent":
+                groups.importantUrgent.push(task);
+                break;
+
+            case "important":
+                groups.important.push(task);
+                break;
+
+            case "urgent":
+                groups.urgent.push(task);
+                break;
+
+            default:
+                groups.other.push(task);
+
+        }
+
+    });
+
+    const render = (listId, countId, tasks) => {
+
+        const list =
+            document.getElementById(listId);
+
+        const count =
+            document.getElementById(countId);
+
+        if (!list || !count) return;
+
+        count.textContent = tasks.length;
+
+        list.innerHTML = tasks
+            .slice(0,3)
+            .map(t => `
+                <div class="task-preview">
+                    ${t.text}
+                </div>
+            `)
+            .join("");
+
+    };
+
+    render(
+        "preview-important-urgent",
+        "count-important-urgent",
+        groups.importantUrgent
+    );
+
+    render(
+        "preview-important",
+        "count-important",
+        groups.important
+    );
+
+    render(
+        "preview-urgent",
+        "count-urgent",
+        groups.urgent
+    );
+
+    render(
+        "preview-other",
+        "count-other",
+        groups.other
+    );
+
+};
