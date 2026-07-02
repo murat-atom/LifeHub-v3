@@ -159,6 +159,8 @@ Tasks.renderHub = function () {
 
 `;
 
+Tasks.bindHub();
+    
 };
 Tasks.bindHub = function () {
 
@@ -174,18 +176,5 @@ Tasks.bindHub = function () {
         };
 
     }
-
-};
-// =====================================
-// Запуск меню задач
-// =====================================
-
-const oldRenderHub = Tasks.renderHub;
-
-Tasks.renderHub = function () {
-
-    oldRenderHub();
-
-    Tasks.bindHub();
 
 };
