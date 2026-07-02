@@ -75,6 +75,8 @@ if (
 
     Tasks.renderHub();
 
+    Tasks.bindHub();
+
 }
         
     }
