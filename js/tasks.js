@@ -316,6 +316,7 @@ tasks.slice(0,3).forEach(task => {
 
 Tasks.changePriority = function (id) {
 
+alert("Нажатие работает");
     const task =
         this.items.find(t => t.id === id);
 
