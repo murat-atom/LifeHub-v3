@@ -320,42 +320,80 @@ Tasks.changePriority = function(id){
 
     if(!task) return;
 
-    const value = prompt(
-`Выберите квадрант:
+    const current = task.priority || "normal";
 
-1 — Срочно и важно
-2 — Важно не срочно
-3 — Срочно не важно
-4 — Остальное`
-    );
+    const options = {
+        importantUrgent: "1",
+        important: "2",
+        urgent: "3",
+        normal: "4"
+    };
 
-    if(value === null) return;
+    let next;
 
-    switch(value){
+    switch(current){
 
-        case "1":
-            task.priority = "importantUrgent";
+        case "importantUrgent":
+            next = "important";
             break;
 
-        case "2":
-            task.priority = "important";
+        case "important":
+            next = "urgent";
             break;
 
-        case "3":
-            task.priority = "urgent";
-            break;
-
-        case "4":
-            task.priority = "normal";
+        case "urgent":
+            next = "normal";
             break;
 
         default:
-            return;
+            next = "importantUrgent";
 
     }
+
+    task.priority = next;
 
     this.save();
 
     this.renderMatrix();
 
 };
+document.addEventListener("DOMContentLoaded", () => {
+
+    document
+        .querySelectorAll(".priority-btn")
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                const task = Tasks.items.find(
+                    t => t.id === Tasks.selectedTask
+                );
+
+                if (!task) return;
+
+                task.priority =
+                    button.dataset.priority;
+
+                Tasks.save();
+
+                Tasks.renderMatrix();
+
+                document
+                    .getElementById("priorityModal")
+                    .classList.add("hidden");
+
+            };
+
+        });
+
+    document
+        .getElementById("closePriority")
+        .onclick = () => {
+
+            document
+                .getElementById("priorityModal")
+                .classList.add("hidden");
+
+        };
+
+});
