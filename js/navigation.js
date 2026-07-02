@@ -78,6 +78,15 @@ if (
     Tasks.bindHub();
 
 }
+
+if (
+    name === "matrix" &&
+    typeof Tasks.renderMatrix === "function"
+) {
+
+    Tasks.renderMatrix();
+
+}
         
     }
 
