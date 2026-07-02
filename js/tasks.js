@@ -316,39 +316,13 @@ tasks.slice(0,3).forEach(task => {
 
 Tasks.changePriority = function(id){
 
-    const task = this.items.find(t => t.id === id);
+    this.selectedTask = id;
 
-    if(!task) return;
+    document
+        .getElementById("priorityModal")
+        .classList.remove("hidden");
 
-    const current = task.priority || "normal";
-
-    const options = {
-        importantUrgent: "1",
-        important: "2",
-        urgent: "3",
-        normal: "4"
-    };
-
-    let next;
-
-    switch(current){
-
-        case "importantUrgent":
-            next = "important";
-            break;
-
-        case "important":
-            next = "urgent";
-            break;
-
-        case "urgent":
-            next = "normal";
-            break;
-
-        default:
-            next = "importantUrgent";
-
-    }
+};
 
     task.priority = next;
 
