@@ -324,12 +324,6 @@ Tasks.changePriority = function(id){
 
 };
 
-    task.priority = next;
-
-    this.save();
-
-    this.renderMatrix();
-
 };
 document.addEventListener("DOMContentLoaded", () => {
 
