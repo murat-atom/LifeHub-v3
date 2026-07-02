@@ -68,6 +68,15 @@ const Navigation = {
 
         });
 
+if (
+    name === "tasks" &&
+    typeof Tasks.renderHub === "function"
+) {
+
+    Tasks.renderHub();
+
+}
+        
     }
 
 };
