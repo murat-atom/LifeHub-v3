@@ -182,59 +182,6 @@ Tasks.bindHub = function () {
 // Матрица Эйзенхауэра
 // =====================================
 
-Tasks.renderMatrix = function () {
-
-    const groups = {
-        importantUrgent: [],
-        important: [],
-        urgent: [],
-        other: []
-    };
-
-    this.items.forEach(task => {
-
-        switch (task.priority) {
-
-            case "importantUrgent":
-                groups.importantUrgent.push(task);
-                break;
-
-            case "important":
-                groups.important.push(task);
-                break;
-
-            case "urgent":
-                groups.urgent.push(task);
-                break;
-
-            default:
-                groups.other.push(task);
-
-        }
-
-    });
-
-    this.fillMatrix(
-        "important-urgent",
-        groups.importantUrgent
-    );
-
-    this.fillMatrix(
-        "important",
-        groups.important
-    );
-
-    this.fillMatrix(
-        "urgent",
-        groups.urgent
-    );
-
-    this.fillMatrix(
-        "other",
-        groups.other
-    );
-
-};
 Tasks.fillMatrix = function (name, list) {
 
     const counter =
