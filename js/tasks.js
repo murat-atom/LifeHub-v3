@@ -324,7 +324,6 @@ Tasks.changePriority = function(id){
 
 };
 
-};
 document.addEventListener("DOMContentLoaded", () => {
 
     document
