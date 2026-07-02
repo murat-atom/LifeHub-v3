@@ -210,7 +210,7 @@ renderTasks() {
             ? this.searchInput.value.toLowerCase()
             : "";
 
-    Tasks.items.forEach(task => {
+    Tasks.getAll().forEach(task => {
 
         if (
             search &&
@@ -293,4 +293,8 @@ ${task.text}
 
 };
 
+Tasks.init();
+
 App.init();
+
+Navigation.init();
