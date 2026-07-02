@@ -264,13 +264,17 @@ Tasks.renderMatrix = function () {
         count.textContent = tasks.length;
 
         list.innerHTML = tasks
-            .slice(0,3)
-            .map(t => `
-                <div class="task-preview">
-                    ${t.text}
-                </div>
-            `)
-            .join("");
+    .slice(0,3)
+    .map(t => `
+        <div
+            class="task-preview"
+            onclick="Tasks.changePriority('${t.id}')">
+
+            ${t.text}
+
+        </div>
+    `)
+    .join("");
 
     };
 
@@ -297,5 +301,51 @@ Tasks.renderMatrix = function () {
         "count-other",
         groups.other
     );
+
+};
+// =====================================
+// Изменение квадранта
+// =====================================
+
+Tasks.changePriority = function (id) {
+
+    const task =
+        this.items.find(t => t.id === id);
+
+    if (!task) return;
+
+    const value = prompt(
+
+`Выберите квадрант:
+
+1 — Срочно и важно
+2 — Важно не срочно
+3 — Срочно не важно
+4 — Остальное`
+
+    );
+
+    switch (value) {
+
+        case "1":
+            task.priority = "importantUrgent";
+            break;
+
+        case "2":
+            task.priority = "important";
+            break;
+
+        case "3":
+            task.priority = "urgent";
+            break;
+
+        default:
+            task.priority = "normal";
+
+    }
+
+    this.save();
+
+    this.renderMatrix();
 
 };
