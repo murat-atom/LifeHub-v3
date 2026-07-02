@@ -324,38 +324,22 @@ Tasks.changePriority = function(id){
 
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document
+    .querySelectorAll(".priority-btn")
+    .forEach(button => {
 
-    document
-        .querySelectorAll(".priority-btn")
-        .forEach(button => {
+        button.onclick = () => {
 
-            button.onclick = () => {
+            const task = Tasks.items.find(
+                t => t.id === Tasks.selectedTask
+            );
 
-                const task = Tasks.items.find(
-                    t => t.id === Tasks.selectedTask
-                );
+            if (!task) return;
 
-                if (!task) return;
+            task.priority = button.dataset.priority;
 
-                task.priority =
-                    button.dataset.priority;
-
-                Tasks.save();
-
-                Tasks.renderMatrix();
-
-                document
-                    .getElementById("priorityModal")
-                    .classList.add("hidden");
-
-            };
-
-        });
-
-    document
-        .getElementById("closePriority")
-        .onclick = () => {
+            Tasks.save();
+            Tasks.renderMatrix();
 
             document
                 .getElementById("priorityModal")
@@ -363,4 +347,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         };
 
-});
+    });
+
+document
+    .getElementById("closePriority")
+    .onclick = () => {
+
+        document
+            .getElementById("priorityModal")
+            .classList.add("hidden");
+
+    };
