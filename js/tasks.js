@@ -89,7 +89,9 @@ Tasks.renderHub = function () {
 
     hub.innerHTML = `
 
-<section class="card task-menu-item">
+<section
+    class="card task-menu-item"
+    id="btnMatrix">
 
     <h3>🟦 Матрица Эйзенхауэра</h3>
 
@@ -156,5 +158,21 @@ Tasks.renderHub = function () {
 </section>
 
 `;
+
+};
+Tasks.bindHub = function () {
+
+    const matrix =
+        document.getElementById("btnMatrix");
+
+    if (matrix) {
+
+        matrix.onclick = () => {
+
+            Navigation.open("matrix");
+
+        };
+
+    }
 
 };
