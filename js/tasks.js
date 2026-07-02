@@ -263,18 +263,25 @@ Tasks.renderMatrix = function () {
 
         count.textContent = tasks.length;
 
-        list.innerHTML = tasks
-    .slice(0,3)
-    .map(t => `
-        <div
-            class="task-preview"
-            onclick="Tasks.changePriority('${t.id}')">
+        list.innerHTML = "";
 
-            ${t.text}
+tasks.slice(0,3).forEach(task => {
 
-        </div>
-    `)
-    .join("");
+    const div = document.createElement("div");
+
+    div.className = "task-preview";
+
+    div.textContent = task.text;
+
+    div.onclick = () => {
+
+        Tasks.changePriority(task.id);
+
+    };
+
+    list.appendChild(div);
+
+});
 
     };
 
