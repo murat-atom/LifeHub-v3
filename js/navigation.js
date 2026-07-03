@@ -87,6 +87,7 @@ if (
     Tasks.renderMatrix();
 
 }
+        console.log("Открыт экран:", name);
     const app = document.getElementById("app");
 
 if (app) {
