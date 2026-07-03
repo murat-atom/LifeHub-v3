@@ -88,21 +88,7 @@ if (
 
 }
         console.log("Открыт экран:", name);
-    const app = document.getElementById("app");
-
-if (app) {
-
-    if (name === "matrix") {
-
-        app.classList.add("matrix-mode");
-
-    } else {
-
-        app.classList.remove("matrix-mode");
-
-    }
-
-}
+    
     }
 
 };
