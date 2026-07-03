@@ -7,6 +7,8 @@ const Tasks = {
 
     items: [],
 
+    selectedTask: null,
+    
     init() {
 
         this.items = Storage.load(
