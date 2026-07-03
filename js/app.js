@@ -295,6 +295,8 @@ ${task.text}
 
 Tasks.init();
 
+Tasks.initPriorityModal();
+
 App.init();
 
 Navigation.init();
