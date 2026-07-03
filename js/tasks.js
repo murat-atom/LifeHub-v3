@@ -313,6 +313,10 @@ tasks.slice(0,3).forEach(task => {
 
 };
 // =====================================
+// Priority Functions
+// =====================================
+
+// =====================================
 // Изменение квадранта
 // =====================================
 
@@ -323,6 +327,13 @@ Tasks.changePriority = function(id){
     document
         .getElementById("priorityModal")
         .classList.remove("hidden");
+
+};
+// =====================================
+// Priority Modal
+// =====================================
+
+Tasks.initPriorityModal = function(){
 
 };
 
