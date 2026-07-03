@@ -366,3 +366,30 @@ body{
     background:#2d3d37;
     color:#fff;
 }
+/* =========================
+   Matrix Mode
+   ========================= */
+
+.matrix-mode .header{
+
+    display:none;
+
+}
+
+.matrix-mode body{
+
+    padding-top:10px;
+
+}
+
+.matrix-mode .matrix-grid{
+
+    margin-top:0;
+
+}
+
+.matrix-mode .matrix-card{
+
+    min-height:220px;
+
+}
