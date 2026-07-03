@@ -334,9 +334,6 @@ Tasks.changePriority = function(id){
 // =====================================
 
 Tasks.initPriorityModal = function(){
-
-};
-
 document
     .querySelectorAll(".priority-btn")
     .forEach(button => {
@@ -371,3 +368,6 @@ document
             .classList.add("hidden");
 
     };
+};
+
+
