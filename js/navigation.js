@@ -87,7 +87,23 @@ if (
     Tasks.renderMatrix();
 
 }
-        
+    // Показываем или скрываем верхнюю шапку
+const header =
+    document.querySelector(".header");
+
+if (header) {
+
+    if (name === "matrix") {
+
+        header.style.display = "none";
+
+    } else {
+
+        header.style.display = "";
+
+    }
+
+}    
     }
 
 };
