@@ -224,6 +224,8 @@ body{
 
     flex:1;
 
+    min-height:0;
+
     display:grid;
 
     grid-template-columns:1fr 1fr;
@@ -252,7 +254,7 @@ body{
 
     overflow:hidden;
 
-    min-height:0;
+    height:100%;
 
 }
 
@@ -302,7 +304,11 @@ body{
 
     flex:1;
 
+    min-height:0;
+
     overflow-y:auto;
+
+    -webkit-overflow-scrolling:touch;
 
     display:flex;
 
