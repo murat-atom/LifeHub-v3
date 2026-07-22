@@ -276,14 +276,23 @@ tasks.forEach(task => {
     div.textContent = task.text;
 
     div.onclick = () => {
-
         Tasks.changePriority(task.id);
-
     };
 
     list.appendChild(div);
 
 });
+
+// если задач нет — показываем пустое состояние
+if (tasks.length === 0) {
+
+    list.innerHTML = `
+        <div class="matrix-empty">
+            Нет задач
+        </div>
+    `;
+
+}
 
     };
 
