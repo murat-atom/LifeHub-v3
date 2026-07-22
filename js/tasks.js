@@ -267,7 +267,7 @@ Tasks.renderMatrix = function () {
 
         list.innerHTML = "";
 
-tasks.slice(0,3).forEach(task => {
+tasks.forEach(task => {
 
     const div = document.createElement("div");
 
