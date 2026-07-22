@@ -156,6 +156,10 @@ body{
     display: block;
 }
 
+#screen-matrix.active{
+    display:flex;
+}
+
 .hidden {
     display: none !important;
 }
@@ -397,7 +401,7 @@ body{
 
 }
 
-.matrix-mode body{
+body.matrix-mode{
 
     padding-top:10px;
 
