@@ -301,8 +301,6 @@ tasks.forEach(task => {
 
     };
 
-    list.appendChild(div);
-
 });
 
     list.appendChild(div);
