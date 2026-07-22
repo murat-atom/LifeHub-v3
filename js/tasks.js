@@ -255,11 +255,8 @@ Tasks.renderMatrix = function () {
 
     const render = (listId, countId, tasks) => {
 
-        const list =
-            document.getElementById(listId);
-
-        const count =
-            document.getElementById(countId);
+        const list = document.getElementById(listId);
+        const count = document.getElementById(countId);
 
         if (!list || !count) return;
 
@@ -267,56 +264,36 @@ Tasks.renderMatrix = function () {
 
         list.innerHTML = "";
 
-tasks.forEach(task => {
+        if (tasks.length === 0) {
 
-    const div = document.createElement("div");
+            list.innerHTML = `
+                <div class="matrix-empty">
+                    Нет задач
+                </div>
+            `;
 
-    div.className = "task-preview";
+            return;
+        }
 
-    div.textContent = task.text;
+        tasks.forEach(task => {
 
-    div.draggable = true;
+            const div = document.createElement("div");
 
-    div.dataset.id = task.id;
+            div.className = "task-preview";
 
-    div.addEventListener("dragstart", () => {
+            div.textContent = task.text;
 
-        Tasks.dragTask = task.id;
+            div.dataset.id = task.id;
 
-        div.classList.add("dragging");
+            div.onclick = () => {
 
-    });
+                Tasks.changePriority(task.id);
 
-    div.addEventListener("dragend", () => {
+            };
 
-        Tasks.dragTask = null;
+            list.appendChild(div);
 
-        div.classList.remove("dragging");
-
-    });
-
-    div.onclick = () => {
-
-        Tasks.changePriority(task.id);
-
-    };
-
-});
-
-    list.appendChild(div);
-
-});
-
-// если задач нет — показываем пустое состояние
-if (tasks.length === 0) {
-
-    list.innerHTML = `
-        <div class="matrix-empty">
-            Нет задач
-        </div>
-    `;
-
-}
+        });
 
     };
 
