@@ -357,3 +357,11 @@ body{
     font-size:15px;
 
 }
+
+.task-preview.dragging{
+
+    opacity:.45;
+
+    transform:scale(.96);
+
+}
