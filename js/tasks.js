@@ -275,9 +275,35 @@ tasks.forEach(task => {
 
     div.textContent = task.text;
 
+    div.draggable = true;
+
+    div.dataset.id = task.id;
+
+    div.addEventListener("dragstart", () => {
+
+        Tasks.dragTask = task.id;
+
+        div.classList.add("dragging");
+
+    });
+
+    div.addEventListener("dragend", () => {
+
+        Tasks.dragTask = null;
+
+        div.classList.remove("dragging");
+
+    });
+
     div.onclick = () => {
+
         Tasks.changePriority(task.id);
+
     };
+
+    list.appendChild(div);
+
+});
 
     list.appendChild(div);
 
