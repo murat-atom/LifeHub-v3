@@ -204,15 +204,33 @@ body{
    Матрица Эйзенхауэра
    ========================= */
 
+#screen-matrix{
+
+    height:calc(100vh - 70px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:0;
+
+}
+
 .matrix-grid{
+
+    flex:1;
 
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
+    grid-template-rows:1fr 1fr;
+
     gap:14px;
 
-    margin-top:16px;
+    padding:16px;
+
+    height:100%;
 
 }
 
@@ -220,15 +238,17 @@ body{
 
     background:#13271f;
 
-    border-radius:18px;
+    border-radius:20px;
 
-    padding:16px;
-
-    min-height:170px;
+    padding:18px;
 
     display:flex;
 
     flex-direction:column;
+
+    overflow:hidden;
+
+    min-height:0;
 
 }
 
@@ -276,16 +296,17 @@ body{
 
 .matrix-preview{
 
+    flex:1;
+
+    overflow-y:auto;
+
     display:flex;
 
     flex-direction:column;
 
-    gap:8px;
-
-    flex:1;
+    gap:10px;
 
 }
-
 .urgent-important{
 
     border-left:4px solid #ff4d4d;
@@ -313,13 +334,13 @@ body{
 
     background:#183229;
 
-    padding:10px 12px;
+    padding:14px;
 
-    border-radius:10px;
-
-    margin-bottom:8px;
+    border-radius:12px;
 
     cursor:pointer;
+
+    flex-shrink:0;
 
 }
 
