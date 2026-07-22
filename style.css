@@ -203,58 +203,55 @@ body{
     display: block;
     font-size: 11px;
     margin-top: 4px;
-}
-/* =========================
-   Матрица Эйзенхауэра
+}/* =========================
+   Matrix Screen
    ========================= */
 
 #screen-matrix{
 
-    height:calc(100vh - 70px);
+    position:fixed;
 
-    display:flex;
+    top:0;
+    left:0;
+    right:0;
+    bottom:70px;
 
-    flex-direction:column;
+    padding:14px;
 
-    padding:0;
+    overflow:hidden;
+
+    background:#0b1d16;
 
 }
 
 .matrix-grid{
 
-    flex:1;
-
-    min-height:0;
+    width:100%;
+    height:100%;
 
     display:grid;
 
     grid-template-columns:1fr 1fr;
-
     grid-template-rows:1fr 1fr;
 
     gap:14px;
-
-    padding:16px;
-
-    height:100%;
 
 }
 
 .matrix-card{
 
+    display:flex;
+    flex-direction:column;
+
+    min-height:0;
+
+    overflow:hidden;
+
     background:#13271f;
 
     border-radius:20px;
 
-    padding:18px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    overflow:hidden;
-
-    height:100%;
+    padding:14px;
 
 }
 
@@ -267,6 +264,8 @@ body{
     align-items:center;
 
     margin-bottom:12px;
+
+    flex-shrink:0;
 
 }
 
@@ -281,7 +280,6 @@ body{
 .matrix-count{
 
     width:28px;
-
     height:28px;
 
     border-radius:50%;
@@ -294,9 +292,7 @@ body{
 
     background:#243b31;
 
-    font-size:13px;
-
-    font-weight:700;
+    font-weight:bold;
 
 }
 
@@ -308,15 +304,30 @@ body{
 
     overflow-y:auto;
 
-    -webkit-overflow-scrolling:touch;
-
     display:flex;
 
     flex-direction:column;
 
     gap:10px;
 
+    padding-right:2px;
+
 }
+
+.task-preview{
+
+    background:#183229;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+}
+
 .urgent-important{
 
     border-left:4px solid #ff4d4d;
@@ -339,91 +350,4 @@ body{
 
     border-left:4px solid #39d98a;
 
-}
-.task-preview{
-
-    background:#183229;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    flex-shrink:0;
-
-}
-
-.task-preview:active{
-
-    opacity:.7;
-
-}
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.65);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
-
-.modal-box{
-    width:90%;
-    max-width:340px;
-    background:#13271f;
-    border-radius:20px;
-    padding:20px;
-}
-
-.priority-btn{
-    width:100%;
-    margin-top:12px;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:#183229;
-    color:#fff;
-    font-size:17px;
-}
-
-.cancel-btn{
-    width:100%;
-    margin-top:18px;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:#2d3d37;
-    color:#fff;
-}
-/* =========================
-   Matrix Mode
-   ========================= */
-
-.matrix-mode .header{
-
-    display:none;
-
-}
-
-body.matrix-mode{
-
-    padding-top:10px;
-
-}
-
-.matrix-mode .matrix-grid{
-
-    margin-top:0;
-
-}
-
-.matrix-mode .matrix-card{
-
-    min-height:220px;
-
-}
-.matrix-mode{
-    background:red !important;
 }
