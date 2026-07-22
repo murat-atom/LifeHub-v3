@@ -343,3 +343,17 @@ body{
     border-left:4px solid #39d98a;
 
 }
+
+.matrix-empty{
+
+    color:#7fa18f;
+
+    opacity:.7;
+
+    text-align:center;
+
+    margin-top:20px;
+
+    font-size:15px;
+
+}
