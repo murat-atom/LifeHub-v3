@@ -8,6 +8,7 @@ const Tasks = {
     items: [],
 
     selectedTask: null,
+    dragTask: null,
     
     init() {
 
@@ -284,6 +285,23 @@ Tasks.renderMatrix = function () {
             div.textContent = task.text;
 
             div.dataset.id = task.id;
+            div.draggable = true;
+
+div.addEventListener("dragstart", () => {
+
+    Tasks.dragTask = task.id;
+
+    div.classList.add("dragging");
+
+});
+
+div.addEventListener("dragend", () => {
+
+    Tasks.dragTask = null;
+
+    div.classList.remove("dragging");
+
+});
 
             div.onclick = () => {
 
@@ -296,6 +314,58 @@ Tasks.renderMatrix = function () {
         });
 
     };
+
+    const zones = [
+
+    {
+        id: "preview-important-urgent",
+        priority: "importantUrgent"
+    },
+
+    {
+        id: "preview-important",
+        priority: "important"
+    },
+
+    {
+        id: "preview-urgent",
+        priority: "urgent"
+    },
+
+    {
+        id: "preview-other",
+        priority: "normal"
+    }
+
+];
+
+zones.forEach(zone => {
+
+    const element =
+        document.getElementById(zone.id);
+
+    if (!element) return;
+
+    element.addEventListener("dragover", e => {
+
+        e.preventDefault();
+
+    });
+
+    element.addEventListener("drop", e => {
+
+        e.preventDefault();
+
+        console.log(
+            "Drop:",
+            Tasks.dragTask,
+            "→",
+            zone.priority
+        );
+
+    });
+
+});
 
     render(
         "preview-important-urgent",
