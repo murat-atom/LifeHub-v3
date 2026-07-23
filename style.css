@@ -365,3 +365,21 @@ body{
     transform:scale(.96);
 
 }
+
+.task-preview.moving{
+
+    transform: scale(1.05);
+
+    transition: .2s;
+
+    box-shadow: 0 0 20px rgba(0,255,120,.35);
+
+}
+
+.matrix-move-mode .matrix-card{
+
+    outline:2px solid #2ecc71;
+
+    transition:.2s;
+
+}
