@@ -8,7 +8,11 @@ const Tasks = {
     items: [],
 
     selectedTask: null,
-    dragTask: null,
+    moveTask: null,
+
+moveTimer: null,
+
+moveMode: false,
     
     init() {
 
@@ -285,6 +289,39 @@ Tasks.renderMatrix = function () {
             div.textContent = task.text;
 
             div.dataset.id = task.id;
+            div.addEventListener("touchstart", () => {
+
+    Tasks.moveTimer = setTimeout(() => {
+
+        Tasks.moveMode = true;
+
+        Tasks.moveTask = task.id;
+
+        div.classList.add("moving");
+
+        if (navigator.vibrate) {
+
+            navigator.vibrate(30);
+
+        }
+
+        document.body.classList.add("matrix-move-mode");
+
+    }, 450);
+
+}, { passive: true });
+
+div.addEventListener("touchend", () => {
+
+    clearTimeout(Tasks.moveTimer);
+
+}, { passive: true });
+
+div.addEventListener("touchcancel", () => {
+
+    clearTimeout(Tasks.moveTimer);
+
+}, { passive: true });
             div.draggable = true;
 
 div.addEventListener("dragstart", () => {
