@@ -93,6 +93,13 @@ body{
     margin-bottom:10px;
     background:#183229;
     border-radius:14px;
+
+    -webkit-user-select:none;
+    user-select:none;
+
+    -webkit-touch-callout:none;
+
+    -webkit-tap-highlight-color:transparent;
 }
 
 .deleteButton{
@@ -317,6 +324,15 @@ body{
     cursor:pointer;
 
     flex-shrink:0;
+
+    overflow-wrap:break-word;
+
+    -webkit-user-select:none;
+    user-select:none;
+
+    -webkit-touch-callout:none;
+
+    -webkit-tap-highlight-color:transparent;
 
 }
 
