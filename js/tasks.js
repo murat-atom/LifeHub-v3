@@ -293,19 +293,13 @@ Tasks.renderMatrix = function () {
 
     Tasks.moveTimer = setTimeout(() => {
 
-        Tasks.moveMode = true;
-
-        Tasks.moveTask = task.id;
-
-        div.classList.add("moving");
-
         if (navigator.vibrate) {
 
-            navigator.vibrate(30);
+    navigator.vibrate(30);
 
-        }
+}
 
-        document.body.classList.add("matrix-move-mode");
+Tasks.enterMoveMode(task.id);
 
     }, 450);
 
@@ -497,3 +491,10 @@ Tasks.exitMoveMode = function(){
         });
 
 };
+document
+    .getElementById("cancelMove")
+    ?.addEventListener("click", () => {
+
+        Tasks.exitMoveMode();
+
+    });
