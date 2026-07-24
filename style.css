@@ -516,3 +516,20 @@ body{
     }
 
 }
+/* =====================================
+   Отключение выделения текста в матрице
+===================================== */
+
+.matrix-preview,
+.task-preview,
+.move-panel,
+.move-panel *{
+
+    -webkit-user-select: none;
+    user-select: none;
+
+    -webkit-touch-callout: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+}
