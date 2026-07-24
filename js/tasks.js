@@ -289,7 +289,35 @@ Tasks.renderMatrix = function () {
             div.textContent = task.text;
 
             div.dataset.id = task.id;
-            div.addEventListener("touchstart", () => {
+            div.addEventListener("touchstart", (e) => {
+
+    e.preventDefault();
+
+    Tasks.moveTimer = setTimeout(() => {
+
+        Tasks.moveMode = true;
+
+        Tasks.moveTask = task.id;
+
+        div.classList.add("moving");
+
+        if (navigator.vibrate) {
+            navigator.vibrate(30);
+        }
+
+        document.body.classList.add("matrix-move-mode");
+
+        document.body.classList.add("matrix-move-active");
+
+        const panel = document.getElementById("movePanel");
+
+        if (panel) {
+            panel.classList.remove("hidden");
+        }
+
+    }, 450);
+
+}, { passive: false });
 
     Tasks.moveTimer = setTimeout(() => {
 
