@@ -295,43 +295,11 @@ Tasks.renderMatrix = function () {
 
     Tasks.moveTimer = setTimeout(() => {
 
-        Tasks.moveMode = true;
-
-        Tasks.moveTask = task.id;
-
-        div.classList.add("moving");
-
-        if (navigator.vibrate) {
-            navigator.vibrate(30);
-        }
-
-        document.body.classList.add("matrix-move-mode");
-
-        document.body.classList.add("matrix-move-active");
-
-        const panel = document.getElementById("movePanel");
-
-        if (panel) {
-            panel.classList.remove("hidden");
         }
 
     }, 450);
 
 }, { passive: false });
-
-    Tasks.moveTimer = setTimeout(() => {
-
-        if (navigator.vibrate) {
-
-    navigator.vibrate(30);
-
-}
-
-Tasks.enterMoveMode(task.id);
-
-    }, 450);
-
-}, { passive: true });
 
 div.addEventListener("touchend", () => {
 
@@ -380,6 +348,46 @@ div.addEventListener("touchcancel", () => {
         "count-other",
         groups.other
     );
+
+const zones = [
+
+    {
+        id: "matrix-important-urgent",
+        priority: "importantUrgent"
+    },
+
+    {
+        id: "matrix-important",
+        priority: "important"
+    },
+
+    {
+        id: "matrix-urgent",
+        priority: "urgent"
+    },
+
+    {
+        id: "matrix-other",
+        priority: "normal"
+    }
+
+];
+
+zones.forEach(zone => {
+
+    const card = document.getElementById(zone.id);
+
+    if(!card) return;
+
+    card.onclick = () => {
+
+        if(!Tasks.moveMode) return;
+
+        Tasks.moveToPriority(zone.priority);
+
+    };
+
+});
 
 };
 // =====================================
@@ -438,6 +446,50 @@ document
             .classList.add("hidden");
 
     };
+};
+
+// =====================================
+// Перемещение задачи в квадрант
+// =====================================
+
+Tasks.moveToPriority = function(priority){
+
+    if(!Tasks.moveTask) return;
+
+    const task = Tasks.items.find(
+        t => t.id === Tasks.moveTask
+    );
+
+    if(!task) return;
+
+    task.priority = priority;
+
+    Tasks.save();
+
+    Tasks.moveTask = null;
+
+    Tasks.moveMode = false;
+
+    document.body.classList.remove(
+        "matrix-move-mode",
+        "matrix-move-active"
+    );
+
+    document
+        .querySelectorAll(".moving")
+        .forEach(el=>el.classList.remove("moving"));
+
+    const panel =
+        document.getElementById("movePanel");
+
+    if(panel){
+
+        panel.classList.add("hidden");
+
+    }
+
+    Tasks.renderMatrix();
+
 };
 
 // =====================================
