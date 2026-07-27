@@ -11,9 +11,13 @@ const Tasks = {
 
     moveTask: null,
 
+    moveMode: false,
+
     moveTimer: null,
 
-    moveMode: false,
+    // =========================
+    // Init
+    // =========================
 
     init() {
 
@@ -24,19 +28,31 @@ const Tasks = {
 
     },
 
+    // =========================
+    // Get
+    // =========================
+
     getAll() {
 
         return this.items;
 
     },
 
+    // =========================
+    // Add
+    // =========================
+
     add(text) {
+
+        const value = text.trim();
+
+        if (!value) return;
 
         this.items.push({
 
             id: crypto.randomUUID(),
 
-            text: text.trim(),
+            text: value,
 
             done: false,
 
@@ -50,12 +66,15 @@ const Tasks = {
 
     },
 
+    // =========================
+    // Toggle
+    // =========================
+
     toggle(id) {
 
-        const task =
-            this.items.find(
-                t => t.id === id
-            );
+        const task = this.items.find(
+            t => t.id === id
+        );
 
         if (!task) return;
 
@@ -65,16 +84,23 @@ const Tasks = {
 
     },
 
+    // =========================
+    // Remove
+    // =========================
+
     remove(id) {
 
-        this.items =
-            this.items.filter(
-                t => t.id !== id
-            );
+        this.items = this.items.filter(
+            t => t.id !== id
+        );
 
         this.save();
 
     },
+
+    // =========================
+    // Save
+    // =========================
 
     save() {
 
@@ -88,13 +114,12 @@ const Tasks = {
 };
 
 // =====================================
-// Hub
+// Task Hub
 // =====================================
 
 Tasks.renderHub = function () {
 
-    const hub =
-        document.getElementById("taskHub");
+    const hub = document.getElementById("taskHub");
 
     if (!hub) return;
 
@@ -102,53 +127,53 @@ Tasks.renderHub = function () {
 
 <section class="card task-menu-item" id="btnMatrix">
 
-<h3>🟦 Матрица Эйзенхауэра</h3>
+    <h3>🟦 Матрица Эйзенхауэра</h3>
 
-<p>
-Распределение задач
-по важности
-и срочности
-</p>
-
-</section>
-
-<section class="card task-menu-item">
-
-<h3>🔥 Сегодня</h3>
-
-<p>Все задачи на сегодня</p>
+    <p>
+        Распределение задач
+        по важности
+        и срочности
+    </p>
 
 </section>
 
 <section class="card task-menu-item">
 
-<h3>⭐ Высокий приоритет</h3>
+    <h3>🔥 Сегодня</h3>
 
-<p>Самые важные задачи</p>
-
-</section>
-
-<section class="card task-menu-item">
-
-<h3>📅 На этой неделе</h3>
-
-<p>Ближайшие планы</p>
+    <p>Все задачи на сегодня</p>
 
 </section>
 
 <section class="card task-menu-item">
 
-<h3>📁 Категории</h3>
+    <h3>⭐ Высокий приоритет</h3>
 
-<p>Работа · Дом · Личное</p>
+    <p>Самые важные задачи</p>
 
 </section>
 
 <section class="card task-menu-item">
 
-<h3>⬜ Все задачи</h3>
+    <h3>📅 На этой неделе</h3>
 
-<p>Полный список</p>
+    <p>Ближайшие планы</p>
+
+</section>
+
+<section class="card task-menu-item">
+
+    <h3>📁 Категории</h3>
+
+    <p>Работа · Дом · Личное</p>
+
+</section>
+
+<section class="card task-menu-item">
+
+    <h3>⬜ Все задачи</h3>
+
+    <p>Полный список</p>
 
 </section>
 
@@ -158,16 +183,16 @@ Tasks.renderHub = function () {
 
 };
 
+// =====================================
+
 Tasks.bindHub = function () {
 
-    const matrix =
-        document.getElementById(
-            "btnMatrix"
-        );
+    const btn =
+        document.getElementById("btnMatrix");
 
-    if (!matrix) return;
+    if (!btn) return;
 
-    matrix.onclick = () => {
+    btn.onclick = () => {
 
         Navigation.open("matrix");
 
@@ -247,18 +272,18 @@ Tasks.renderMatrix = function () {
         groups.other
     );
 
-    this.bindQuadrants();
-
 };
 
 // =====================================
-// Отрисовка одного квадранта
-// =====================================
 
 Tasks.renderQuadrant = function (
+
     listId,
+
     countId,
+
     tasks
+
 ) {
 
     const list =
@@ -276,10 +301,14 @@ Tasks.renderQuadrant = function (
     if (tasks.length === 0) {
 
         list.innerHTML = `
-            <div class="matrix-empty">
-                Нет задач
-            </div>
-        `;
+
+<div class="matrix-empty">
+
+Нет задач
+
+</div>
+
+`;
 
         return;
 
@@ -287,105 +316,101 @@ Tasks.renderQuadrant = function (
 
     tasks.forEach(task => {
 
-        const div =
+        const item =
             document.createElement("div");
 
-        div.className = "task-preview";
+        item.className = "task-preview";
 
-        div.dataset.id = task.id;
+        item.dataset.id = task.id;
 
-        div.textContent = task.text;
+        item.textContent = task.text;
 
         if (task.done) {
 
-            div.style.opacity = ".55";
+            item.style.opacity = ".55";
 
-            div.style.textDecoration =
+            item.style.textDecoration =
                 "line-through";
 
         }
 
-        // =====================
-        // Long Press
-        // =====================
-
-        div.addEventListener(
-            "touchstart",
-            (e) => {
-
-                e.preventDefault();
-
-                Tasks.moveTimer =
-                    setTimeout(() => {
-
-                        if (
-                            navigator.vibrate
-                        ) {
-
-                            navigator.vibrate(30);
-
-                        }
-
-                        Tasks.enterMoveMode(
-                            task.id
-                        );
-
-                    }, 450);
-
-            },
-            { passive:false }
-        );
-
-        div.addEventListener(
-            "touchend",
-            () => {
-
-                clearTimeout(
-                    Tasks.moveTimer
-                );
-
-            },
-            { passive:true }
-        );
-
-        div.addEventListener(
-            "touchcancel",
-            () => {
-
-                clearTimeout(
-                    Tasks.moveTimer
-                );
-
-            },
-            { passive:true }
-        );
-
-        // обычный тап
-
-        div.onclick = () => {
-
-            if (Tasks.moveMode)
-                return;
-
-            Tasks.changePriority(
-                task.id
-            );
-
-        };
-
-        list.appendChild(div);
+        list.appendChild(item);
 
     });
 
 };
 
 // =====================================
-// Режим перемещения
+// Priority Modal
 // =====================================
 
-Tasks.enterMoveMode = function (
-    taskId
-) {
+Tasks.changePriority = function(id){
+
+    this.selectedTask = id;
+
+    const modal =
+        document.getElementById("priorityModal");
+
+    if(modal){
+
+        modal.classList.remove("hidden");
+
+    }
+
+};
+
+Tasks.initPriorityModal = function(){
+
+    document
+        .querySelectorAll(".priority-btn")
+        .forEach(button=>{
+
+            button.onclick = ()=>{
+
+                const task =
+                    this.items.find(
+                        t => t.id === this.selectedTask
+                    );
+
+                if(!task) return;
+
+                task.priority =
+                    button.dataset.priority;
+
+                this.save();
+
+                this.renderMatrix();
+
+                document
+                    .getElementById("priorityModal")
+                    .classList.add("hidden");
+
+            };
+
+        });
+
+    const close =
+        document.getElementById("closePriority");
+
+    if(close){
+
+        close.onclick = ()=>{
+
+            document
+                .getElementById("priorityModal")
+                .classList.add("hidden");
+
+        };
+
+    }
+
+};
+
+// =====================================
+// Move Mode
+// =====================================
+
+Tasks.enterMoveMode = function(taskId){
 
     this.moveMode = true;
 
@@ -395,59 +420,40 @@ Tasks.enterMoveMode = function (
         "matrix-move-active"
     );
 
-    const panel =
-        document.getElementById(
-            "movePanel"
-        );
-
-    if (panel) {
-
-        panel.classList.remove(
-            "hidden"
-        );
-
-    }
-
     document
-        .querySelectorAll(
-            ".matrix-card"
-        )
-        .forEach(card => {
+        .querySelectorAll(".matrix-card")
+        .forEach(card=>{
 
-            card.classList.add(
-                "move-target"
-            );
+            card.classList.add("move-target");
 
         });
 
     document
-        .querySelectorAll(
-            ".task-preview"
-        )
-        .forEach(item => {
+        .querySelectorAll(".task-preview")
+        .forEach(item=>{
 
-            item.classList.remove(
-                "move-selected"
-            );
+            item.classList.remove("move-selected");
 
-            if (
-                item.dataset.id ===
-                taskId
-            ) {
+            if(item.dataset.id===taskId){
 
-                item.classList.add(
-                    "move-selected"
-                );
+                item.classList.add("move-selected");
 
             }
 
         });
 
+    const panel =
+        document.getElementById("movePanel");
+
+    if(panel){
+
+        panel.classList.remove("hidden");
+
+    }
+
 };
 
-// =====================================
-
-Tasks.exitMoveMode = function () {
+Tasks.exitMoveMode = function(){
 
     this.moveMode = false;
 
@@ -457,60 +463,41 @@ Tasks.exitMoveMode = function () {
         "matrix-move-active"
     );
 
+    document
+        .querySelectorAll(".matrix-card")
+        .forEach(card=>{
+
+            card.classList.remove("move-target");
+
+        });
+
+    document
+        .querySelectorAll(".task-preview")
+        .forEach(item=>{
+
+            item.classList.remove("move-selected");
+
+        });
+
     const panel =
-        document.getElementById(
-            "movePanel"
-        );
+        document.getElementById("movePanel");
 
-    if (panel) {
+    if(panel){
 
-        panel.classList.add(
-            "hidden"
-        );
+        panel.classList.add("hidden");
 
     }
 
-    document
-        .querySelectorAll(
-            ".matrix-card"
-        )
-        .forEach(card => {
-
-            card.classList.remove(
-                "move-target"
-            );
-
-        });
-
-    document
-        .querySelectorAll(
-            ".task-preview"
-        )
-        .forEach(item => {
-
-            item.classList.remove(
-                "move-selected"
-            );
-
-        });
-
 };
 
-// =====================================
-// Перемещение задачи
-// =====================================
-
-Tasks.moveToPriority = function (
-    priority
-) {
+Tasks.moveToPriority = function(priority){
 
     const task =
         this.items.find(
-            t =>
-            t.id === this.moveTask
+            t=>t.id===this.moveTask
         );
 
-    if (!task) {
+    if(!task){
 
         this.exitMoveMode();
 
@@ -529,155 +516,96 @@ Tasks.moveToPriority = function (
 };
 
 // =====================================
-// Обработчики квадрантов
+// iPhone Events
 // =====================================
 
-Tasks.bindQuadrants = function () {
-
-    const zones = [
-
-        {
-            id: "matrix-important-urgent",
-            priority: "importantUrgent"
-        },
-
-        {
-            id: "matrix-important",
-            priority: "important"
-        },
-
-        {
-            id: "matrix-urgent",
-            priority: "urgent"
-        },
-
-        {
-            id: "matrix-other",
-            priority: "normal"
-        }
-
-    ];
-
-    zones.forEach(zone => {
-
-        const card =
-            document.getElementById(
-                zone.id
-            );
-
-        if (!card) return;
-
-        card.onclick = () => {
-
-            if (!Tasks.moveMode)
-                return;
-
-            Tasks.moveToPriority(
-                zone.priority
-            );
-
-        };
-
-    });
-
-};
-
-// =====================================
-// Смена приоритета
-// =====================================
-
-Tasks.changePriority = function(id){
-
-    this.selectedTask = id;
-
-    const modal =
-        document.getElementById(
-            "priorityModal"
-        );
-
-    if(modal){
-
-        modal.classList.remove(
-            "hidden"
-        );
-
-    }
-
-};
-
-// =====================================
-// Priority Modal
-// =====================================
-
-Tasks.initPriorityModal = function(){
+Tasks.bindMatrixEvents = function(){
 
     document
-        .querySelectorAll(
-            ".priority-btn"
-        )
-        .forEach(button=>{
+        .querySelectorAll(".task-preview")
+        .forEach(item=>{
 
-            button.onclick = ()=>{
+            item.style.webkitUserSelect="none";
+            item.style.userSelect="none";
+            item.style.webkitTouchCallout="none";
 
-                const task =
-                    Tasks.items.find(
-                        t =>
-                        t.id ===
-                        Tasks.selectedTask
-                    );
+            item.addEventListener("touchstart",(e)=>{
 
-                if(!task) return;
+                e.preventDefault();
 
-                task.priority =
-                    button.dataset.priority;
+                const id=item.dataset.id;
 
-                Tasks.save();
+                this.moveTimer=setTimeout(()=>{
 
-                Tasks.renderMatrix();
+                    if(navigator.vibrate){
 
-                document
-                    .getElementById(
-                        "priorityModal"
-                    )
-                    .classList.add(
-                        "hidden"
-                    );
+                        navigator.vibrate(30);
+
+                    }
+
+                    this.enterMoveMode(id);
+
+                },450);
+
+            },{passive:false});
+
+            item.addEventListener("touchend",()=>{
+
+                clearTimeout(this.moveTimer);
+
+            });
+
+            item.addEventListener("touchcancel",()=>{
+
+                clearTimeout(this.moveTimer);
+
+            });
+
+            item.onclick=()=>{
+
+                if(this.moveMode) return;
+
+                this.changePriority(item.dataset.id);
 
             };
 
         });
 
-    const close =
-        document.getElementById(
-            "closePriority"
-        );
+    [
 
-    if(close){
+        ["matrix-important-urgent","importantUrgent"],
 
-        close.onclick = ()=>{
+        ["matrix-important","important"],
 
-            document
-                .getElementById(
-                    "priorityModal"
-                )
-                .classList.add(
-                    "hidden"
-                );
+        ["matrix-urgent","urgent"],
+
+        ["matrix-other","normal"]
+
+    ].forEach(zone=>{
+
+        const card =
+            document.getElementById(zone[0]);
+
+        if(!card) return;
+
+        card.onclick=()=>{
+
+            if(!this.moveMode) return;
+
+            this.moveToPriority(zone[1]);
 
         };
 
-    }
+    });
 
     const cancel =
-        document.getElementById(
-            "cancelMove"
-        );
+        document.getElementById("cancelMove");
 
     if(cancel){
 
-        cancel.onclick = ()=>{
+        cancel.onclick=()=>{
 
-            Tasks.exitMoveMode();
+            this.exitMoveMode();
 
         };
 
@@ -686,16 +614,16 @@ Tasks.initPriorityModal = function(){
 };
 
 // =====================================
-// Инициализация
+// Patch renderMatrix
 // =====================================
 
-Tasks.init();
+const __renderMatrix =
+    Tasks.renderMatrix;
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+Tasks.renderMatrix = function(){
 
-        Tasks.initPriorityModal();
+    __renderMatrix.call(this);
 
-    }
-);
+    this.bindMatrixEvents();
+
+};
