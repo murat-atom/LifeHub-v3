@@ -1,59 +1,62 @@
-// =====================================
+// =========================
 // LifeHub V3
 // Move Module
-// Для iPhone
-// =====================================
+// =========================
 
-Tasks.enterMoveMode = function(taskId){
+Tasks.startLongPress = function (element, taskId) {
 
-    this.moveMode = true;
+    let startX = 0;
+    let startY = 0;
 
-    this.moveTask = taskId;
+    element.addEventListener("touchstart", (e) => {
 
-    document.body.classList.add(
-        "matrix-move-active"
-    );
+        if (Tasks.moveMode) return;
 
-    const panel =
-        document.getElementById(
-            "movePanel"
-        );
+        const touch = e.touches[0];
 
-    if(panel){
+        startX = touch.clientX;
+        startY = touch.clientY;
 
-        panel.classList.remove(
-            "hidden"
-        );
+        Tasks.moveTimer = setTimeout(() => {
 
-    }
+            if (navigator.vibrate) {
 
-    document
-        .querySelectorAll(".matrix-card")
-        .forEach(card=>{
-
-            card.classList.add(
-                "move-target"
-            );
-
-        });
-
-    document
-        .querySelectorAll(".task-preview")
-        .forEach(item=>{
-
-            item.classList.remove(
-                "move-selected"
-            );
-
-            if(item.dataset.id===taskId){
-
-                item.classList.add(
-                    "move-selected"
-                );
+                navigator.vibrate(30);
 
             }
 
-        });
+            Tasks.enterMoveMode(taskId);
+
+        }, 450);
+
+    }, { passive: true });
+
+    element.addEventListener("touchmove", (e) => {
+
+        const touch = e.touches[0];
+
+        const dx = Math.abs(touch.clientX - startX);
+
+        const dy = Math.abs(touch.clientY - startY);
+
+        if (dx > 8 || dy > 8) {
+
+            clearTimeout(Tasks.moveTimer);
+
+        }
+
+    }, { passive: true });
+
+    element.addEventListener("touchend", () => {
+
+        clearTimeout(Tasks.moveTimer);
+
+    });
+
+    element.addEventListener("touchcancel", () => {
+
+        clearTimeout(Tasks.moveTimer);
+
+    });
 
 };
-
